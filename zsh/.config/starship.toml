@@ -1,0 +1,83 @@
+# ~/.config/starship.toml - v2 (Updated for two lines and OS icon)
+
+# --- Prompt layout (2 lines) with rounded-left + pointed-right + left gutter
+format = """
+[╭](fg:#a6adc8)[](fg:#94e2d5)\
+$os\
+[](fg:#94e2d5 bg:#cba6f7)\
+$username\
+[](fg:#cba6f7 bg:#b4befe)\
+$directory\
+([](fg:#b4befe bg:#89dceb)$git_branch$git_status[](fg:#89dceb bg:#f5c2e7))\
+${custom.dir_to_time_sep}\
+$time\
+[](fg:#f5c2e7)
+[╰─](fg:#a6adc8)$character"""
+
+# --- Module Configurations ---
+
+# [OS Module]
+# Shows the icon for your operating system.
+[os]
+style = "bg:#94e2d5 fg:#1e1e2e" # Background: Teal
+disabled = false
+format = "[ $symbol ]($style)" # The $symbol variable will be your OS icon e.g. 
+[os.symbols]
+Macos = " " #リンゴのicon
+Ubuntu = " " #Ubuntuのicon
+
+# [Username Module]
+# Shows your username.
+[username]
+style_user = "bg:#cba6f7 fg:#1e1e2e" # Background: Lavender
+style_root = "bg:#f38ba8 fg:#1e1e2e"
+format = "[ $user ]($style)"
+show_always = true
+
+# [Directory Module]
+# Shows the current directory.
+[directory]
+style = "bg:#b4befe fg:#1e1e2e" # Background: Periwinkle
+format = "[ 📁 $path ]($style)"
+truncation_length = 3
+truncate_to_repo = false
+home_symbol = "~"
+
+# [Time Module]
+# Shows the current time.
+[time]
+disabled = false
+style = "bg:#f5c2e7 fg:#1e1e2e" # Background: Pink
+format = "[ ♥ $time ]($style)"
+time_format = "%R" # 24-hour format (HH:MM)
+
+#[character]
+#success_symbol = "[→](fg:#94e2d5)"  # Teal
+#error_symbol   = "[→](fg:#eba0ac)"  # Maroon
+[character]
+success_symbol = "[▸](fg:#74c7ec)"  # Sapphire
+error_symbol   = "[▸](fg:#fab387)"  # Peach
+
+[git_branch]
+# Sapphire bg, same fg as the rest
+style = "bg:#89dceb fg:#1e1e2e"
+symbol = " "            # use " " if not on a Nerd Font
+format = "[ $symbol$branch ]($style)"
+truncation_length = 24
+truncation_symbol = "…"
+
+[git_status]
+style = "bg:#89dceb fg:#1e1e2e"
+# compact: show file-status symbols + ahead/behind
+format = "[ $all_status$ahead_behind ]($style)"
+
+[git_state]
+# (optional) rebase/merge progress—uses same pill color
+style = "bg:#89dceb fg:#1e1e2e"
+format = "[ $state( $progress_current/$progress_total) ]($style)"
+
+[custom.dir_to_time_sep]
+when = "! git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+symbol = ""
+style  = "fg:#b4befe bg:#f5c2e7"
+format = "[$symbol]($style)"

@@ -39,6 +39,15 @@ eval "$(starship init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # (removed the older: source <(fzf --zsh))
 
+# put these right before sourcing autosuggestions
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+  vi-backward-delete-char backward-delete-char
+  backward-kill-word kill-word
+  kill-whole-line
+)
+
 # --- Autosuggestions (inline gray hints)
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
